@@ -71,4 +71,7 @@ func createRandFile(path string) error {
         return err
     }
     defer file.Close() // Ensures file deleltion even in case of error
+    
+    fileContent := []byte("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+       
 }
