@@ -50,6 +50,24 @@ func Shred(path string) error {
 	}
 	defer file.Close() // Ensures file deletion even in case of error
 
+	// Get file size
+	fileInfo, err := file.Stat()
+	if err != nil {
+		return err
+	}
+	fileSize := fileInfo.Size()
+
+	// Randomize data 3x
+	for i := 0; i < 3; i++ {
+		randomData := make([]byte, fileSize)
+		if _, err := rand.Read(randomData); err != nil {
+			return err
+		}
+		if _, err := file.WriteAt(randomData, 0); err != nil {
+			return err
+		}
+	}
+
 	file.Close()
 	return os.Remove(path)
 }
@@ -61,17 +79,6 @@ func shredOnly(path string) error {
 		return err
 	}
 	defer file.Close() // Ensures file deletion even in case of error
-
-	// Randomize data 3x
-	for i := 0; i < 3; i++ {
-		randomData := make([]byte, 1024)
-		if _, err := rand.Read(randomData); err != nil {
-			return err
-		}
-		if _, err := file.WriteAt(randomData, 0); err != nil {
-			return err
-		}
-	}
 
 	file.Close()
 	return os.Remove(path)
