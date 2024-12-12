@@ -1,4 +1,5 @@
 # Shred Tool (Go)
+**(Tested on Ubuntu 20.04 LTS)**
 ## Description
 Will remove a given file (by default, "randomfile.txt") within the same directory [main.go](https://github.com/charlesvt/shred-tool-Go/blob/main/main.go) is located in.
 ## Dependencies
